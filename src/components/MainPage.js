@@ -20,7 +20,7 @@ const MainPage = () => {
   //useEffect로 실행이 반복되지 않고(무한 콜백) 한 번만 실행되게 해준다.
   useEffect(() => {
     axios
-      .get("https://044fbdc6-5eb3-40c1-976f-426f5cde36f7.mock.pstmn.io/products") /* []로 배열형으로 나열되어 있다 = 받을 때도 배열형으로 받음( useState([]) ) */
+      .get("https://c453a1d4-366a-484b-a313-45b15b866147.mock.pstmn.io/product") /* []로 배열형으로 나열되어 있다 = 받을 때도 배열형으로 받음( useState([]) ) */
 
       // 통신(get) 성공했을 경우
       .then((res) => {
@@ -34,11 +34,6 @@ const MainPage = () => {
 
   return (
     <>
-      <div id="header">
-        <div id="header-area">
-          <img src="images/icons/logo.png" alt="logo" />
-        </div>
-      </div>
       <div id="body">
         <div id="banner">
           <img src="images/banners/banner1.png" alt="banner1" />
@@ -49,7 +44,9 @@ const MainPage = () => {
             console.log("map에서 반환된 product:", product, idx);
             return (
               <div className="product-card" key={idx}>
-                <Link className="product-link" to={`/product/${idx}`}>
+                {/* id는 개인식별자다.
+                배열순서(인덱스번호)는 수정할 수 없다.  */}
+                <Link className="product-link" to={`/product/${product.id}`}>
                   <div>
                     <img className="product-img" src={product.imageUrl} alt="{product.name}" />
                   </div>
@@ -66,13 +63,6 @@ const MainPage = () => {
             );
           })}
         </div>
-      </div>
-      <div id="footer">
-        <a href="#">회사소개</a>
-        <a href="#">이용약관</a>
-        <a href="#">통신판매업:123-1234</a>
-        <a href="#">사업자등록번호:456-4567</a>
-        <a href="#">개인정보</a>
       </div>
     </>
   );

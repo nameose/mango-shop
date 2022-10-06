@@ -12,13 +12,12 @@ const ProductPage = () => {
   // useEffect:콜백함수. 의존성 배열임. []라고 적으면 한 번만 실행, []안에 내용을 적으면 콜백
   useEffect(() => {
     axios
-      .get(`https://c453a1d4-366a-484b-a313-45b15b866147.mock.pstmn.io/product/${id}`)
+      .get(`http://localhost:8080/products/${id}`)
 
       // 통신(get) 성공했을 경우
       .then((res) => {
-        product = res.data;
+        product = res.data.product;
         setProduct(product);
-        console.log(res);
       })
       //실패했을 경우
       .catch((err) => {});

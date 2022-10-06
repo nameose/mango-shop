@@ -88,8 +88,17 @@
 .product-seller {
   display: flex;
   align-items: center;
-  margin-top: 12px;
 }
 .product-avatar {
   width: 24px;
+}
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+.product-data {
+  font-size: 12px;
+  color: #889;
 }

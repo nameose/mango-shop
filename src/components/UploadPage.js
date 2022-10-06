@@ -1,4 +1,4 @@
-import { Form, Divider, InputNumber, Button, Upload, Input } from "antd";
+import { Form, Divider, InputNumber, Button,  Input } from "antd";
 import "./UploadPage.css";
 const UploadPage = () => {
   const onFinish = (values) => {

@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./MainPage.css";
 import axios from "axios";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
 // import from:전체 코드의 한 부분만을 가지고 올 때 from 사용
 
 const MainPage = () => {
@@ -20,18 +24,19 @@ const MainPage = () => {
   //useEffect로 실행이 반복되지 않고(무한 콜백) 한 번만 실행되게 해준다.
   useEffect(() => {
     axios
-      .get("https://c453a1d4-366a-484b-a313-45b15b866147.mock.pstmn.io/product") /* []로 배열형으로 나열되어 있다 = 받을 때도 배열형으로 받음( useState([]) ) */
+      .get("http://localhost:8080/products") /* []로 배열형으로 나열되어 있다 = 받을 때도 배열형으로 받음( useState([]) ) */
 
       // 통신(get) 성공했을 경우
       .then((res) => {
-        products = res.data.products;
-        console.log(products);
+        products = res.data.product;
         setProducts(products);
       })
       //실패했을 경우
       .catch((err) => {});
   }, []);
-
+  if (products === undefined) {
+    return <h1>상품 정보를 받고 있습니다.</h1>;
+  }
   return (
     <>
       <div id="body">
@@ -41,7 +46,6 @@ const MainPage = () => {
         <h2>Products</h2>
         <div id="product-list">
           {products.map((product, idx) => {
-            console.log("map에서 반환된 product:", product, idx);
             return (
               <div className="product-card" key={idx}>
                 {/* id는 개인식별자다.
@@ -53,9 +57,12 @@ const MainPage = () => {
                   <div className="product-content">
                     <span className="product-name">{product.name}</span>
                     <span className="product-price">{product.price}원</span>
-                    <div className="product-seller">
-                      <img className="product-avatar" src="images/icons/avatar.png" alt="" />
-                      <span>{product.seller}</span>
+                    <div className="product-footer">
+                      <div className="product-seller">
+                        <img className="product-avatar" src="images/icons/avatar.png" alt="" />
+                        <span>{product.seller}</span>
+                      </div>
+                      <span className="product-data">{dayjs(product.createdAt).fromNow()}</span>
                     </div>
                   </div>
                 </Link>

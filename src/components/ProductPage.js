@@ -1,3 +1,4 @@
+import { API_URL } from "../config/constants";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -31,7 +32,7 @@ const ProductPage = () => {
     <>
       {/* <h1>선택하신 상품은 {id}번 상품입니다.</h1> */}
       <div id="image-box">
-        <img src={`/${product.imageUrl}`} alt={product.name} />
+        <img src={`${API_URL}/${product.imageUrl}`} alt={product.name} />
       </div>
       <div id="profile-box">
         <img src="/images/icons/avatar.png" alt={product.seller} />
